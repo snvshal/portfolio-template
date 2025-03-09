@@ -2,20 +2,244 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --paper: 36 33% 97%;
+    --paper-grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    --ink: 25 10% 15%;
+    --ink-light: 25 8% 35%;
+
+    --foreground: var(--ink);
+    --background: var(--paper);
+
+    --card: 36 33% 97%;
+    --card-foreground: var(--ink);
+
+    --popover: 36 33% 97%;
+    --popover-foreground: var(--ink);
+
+    --primary: 25 95% 53%;
+    --primary-foreground: 36 33% 97%;
+
+    --secondary: 36 20% 92%;
+    --secondary-foreground: var(--ink);
+
+    --muted: 36 20% 92%;
+    --muted-foreground: var(--ink-light);
+
+    --accent: 36 20% 92%;
+    --accent-foreground: var(--ink);
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 36 33% 97%;
+
+    --border: 25 8% 80%;
+    --input: 25 8% 80%;
+    --ring: 25 95% 53%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --paper: 20 14% 8%;
+    --paper-grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    --ink: 40 30% 92%;
+    --ink-light: 40 15% 70%;
+
+    --foreground: var(--ink);
+    --background: var(--paper);
+
+    --card: 20 14% 10%;
+    --card-foreground: var(--ink);
+
+    --popover: 20 14% 10%;
+    --popover-foreground: var(--ink);
+
+    --primary: 30 90% 55%;
+    --primary-foreground: 20 14% 8%;
+
+    --secondary: 20 10% 15%;
+    --secondary-foreground: var(--ink);
+
+    --muted: 20 10% 15%;
+    --muted-foreground: var(--ink-light);
+
+    --accent: 20 10% 15%;
+    --accent-foreground: var(--ink);
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 40 30% 92%;
+
+    --border: 20 10% 20%;
+    --input: 20 10% 20%;
+    --ring: 30 90% 55%;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-paper text-ink;
+    background-image: var(--paper-grain);
+    background-blend-mode: multiply;
+    background-size: 200px;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+
+  .font-body {
+    font-family: var(--font-body);
+  }
+}
+
+@layer components {
+  .bg-paper {
+    @apply bg-background;
+    background-image: var(--paper-grain);
+    background-blend-mode: multiply;
+    background-size: 200px;
+  }
+
+  .paper-card {
+    @apply relative rounded-md p-6;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    background-image: var(--paper-grain);
+    background-blend-mode: multiply;
+    background-size: 200px;
+  }
+
+  .paper-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    border-radius: inherit;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .dark .paper-card::before {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .paper-project {
+    @apply bg-paper border border-border/40 shadow-sm;
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .paper-project:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .dark .paper-project:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .paper-project::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 20px 20px 0;
+    border-color: transparent var(--secondary) transparent transparent;
+    z-index: 1;
+  }
+
+  .paper-button {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+  }
+
+  .paper-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  }
+
+  .paper-button:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .paper-button-outline {
+    @apply border-ink/20 text-ink hover:bg-secondary/50 hover:text-ink;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+
+  .paper-icon-button {
+    @apply hover:bg-secondary/50;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+  }
+
+  .paper-icon-button:hover {
+    transform: translateY(-1px);
+  }
+
+  .paper-icon-button:active {
+    transform: translateY(0);
+  }
+
+  .paper-photo {
+    @apply border-4 border-background;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    position: relative;
+    transform: rotate(2deg);
+  }
+
+  .dark .paper-photo {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .paper-photo::before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .dark .paper-photo::before {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .paper-tag {
+    @apply bg-secondary text-ink border border-border/40;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+
+  .paper-tabs {
+    @apply bg-secondary border border-border/40;
+  }
+
+  .paper-form input,
+  .paper-form textarea {
+    @apply bg-paper border-ink/20;
+    background-image: var(--paper-grain);
+    background-blend-mode: multiply;
+    background-size: 200px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+
+  .dark .paper-form input,
+  .dark .paper-form textarea {
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
 }
