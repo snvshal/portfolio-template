@@ -403,7 +403,7 @@ export default function Portfolio() {
       </main>
 
       <footer className="border-t border-ink/10 py-6 md:py-8 bg-paper">
-        <div className="container flex flex-col items-center justify-between gap-4 md:flex-row">
+        <div className="flex flex-col items-center justify-between gap-4 px-6 md:px-16 md:flex-row">
           <div className="flex items-center gap-2">
             <div className="h-6 w-6 rounded-full bg-ink"></div>
             <span className="text-sm font-serif font-semibold">John Doe</span>
