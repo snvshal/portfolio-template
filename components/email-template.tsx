@@ -27,6 +27,8 @@ const styles = {
     color: "#333",
     marginBottom: "14px",
     display: "flex",
+    borderBottom: "1px solid #ebebeb",
+    paddingBottom: "2px",
   },
   label: {
     fontWeight: "500",

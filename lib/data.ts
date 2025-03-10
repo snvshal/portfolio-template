@@ -42,3 +42,14 @@ export const projects = [
     tags: ["Figma", "UI/UX", "Portfolio"],
   },
 ]
+
+export const skills = [
+  "React",
+  "Next.js",
+  "TypeScript",
+  "Tailwind CSS",
+  "Node.js",
+  "Figma",
+  "Framer Motion",
+  "GraphQL",
+]

@@ -41,7 +41,8 @@ export async function sendEmail(
     // Send email using Resend
     const { error } = await resend.emails.send({
       from: "Portfolio Contact <onboarding@resend.dev>",
-      to: "your-email@example.com", // Replace with your email
+      // to: "your-email@example.com", // Replace with your email
+      to: process.env.EMAIL_ADDRESS as string,
       subject: `Portfolio Contact: ${subject}`,
       react: await EmailTemplate({ name, email, subject, message }),
       text: message,
