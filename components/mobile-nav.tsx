@@ -50,7 +50,7 @@ export function MobileNav() {
           </Link>
           <Button
             variant="outline"
-            className="font-serif mt-4 hover:text-secondary hover:bg-primary"
+            className="font-serif mt-4 bg-transparent border-ink/20 hover:border-primary hover:text-secondary hover:bg-primary"
           >
             Resume
           </Button>
