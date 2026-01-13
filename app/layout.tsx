@@ -29,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" data-scroll-behavior="smooth">
       <body className={`${serif.variable} ${body.variable} font-body`}>
         {children}
         <Toaster />
